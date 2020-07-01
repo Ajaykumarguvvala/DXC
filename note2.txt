@@ -1,0 +1,175 @@
+MULTI CANCATENATION:
+
+SELECT CONCAT(CONCAT(last_name, '''s job category is '), job_id)
+"Job" FROM employees
+WHERE SUBSTR(job_id, 4) = 'REP';
+
+select sysdate from dual;
+
+
+SELECT SESSIONTIMEZONE, CURRENT_DATE FROM DUAL;
+
+SELECT SESSIONTIMEZONE, CURRENT_TIMESTAMP FROM DUAL;
+
+SELECT first_name,hire_date ,round(sysdate-hire_date,0)/365 year from employees;
+
+https://global.gotomeeting.com/join/933086277
+
+867205331 trainer
+defaultly date is a character
+
+SELECT last_name, salary, NVL(commission_pct, 0), 
+(salary*12) + (salary*12*NVL(commission_pct, 0)) AN_SAL 
+FROM employees;
+
+https://global.gotomeeting.com/join/933086277
+NVL2(expr1, expr2, expr3): 
+If expr1 is not null ,NVL2 returns expr2 . 
+If expr1 is null ,NVL2 returns expr3.
+The argument expr1 can have any data type
+
+NULLIF(expr1, expr2): 
+Compares two expressions and returns null if they are equal , 
+or the first expression if they are not equal.
+
+SELECT SESSIONTIMEZONE, CURRENT_DATE FROM DUAL;
+SELECT SESSIONTIMEZONE, CURRENT_TIMESTAMP FROM DUAL;
+SELECT 'you are'||round(SYSDATE-(04-16-1990),0)/365 ||  'years old' from dual;
+select ' You are ' || round(( sysdate-'04/16/1990')/365) || ' Years old ' from dual
+
+SELECT first_name,hire_date || 'working for' round(sysdate-hire_date)/12 || 'years' from employee;
+SELECT first_name || 'working for'|| round((sysdate-hire_date)/12,0) || 'years' from employees;
+
+SELECT first_name, TO_number(last_name,'')
+from employees;
+
+SELECT first_name,salary,nvl(manager_id,0) from employees;
+select first_name, hire_date, NULLIF(hire_date, To_DATE('08/17/2002')) from employees;
+
+COALESCE(expr1, expr2,…expr n): Returns the first not null expressions in the expression list.
+
+If you do any calculation that invloves NULL columns ?
+Ans: null
+
+NVL(expr1, expr2): Converts a null value to an actual value
+
+NVL2(expr1, expr2, expr3): 
+If expr1 is not null ,NVL2 returns expr2 . 
+If expr1 is null ,NVL2 returns expr3.
+The argument expr1 can have any data type
+
+NULLIF(expr1, expr2): 
+Compares two expressions and returns null if they are equal , 
+or the first expression if they are not equal.
+
+COALESCE(expr1, expr2,…expr n): Returns the first not null expressions in the expression list.
+
+SELECT first_name,department_id,salary case department_id, when  60 then 1.28*salary when  90 then 1.48*salary when department_id 100 then 1.60*salary ELSE salary end as "revised_ salary" FROM employees;
+
+SELECT last_name,salary, 
+(CASE 
+WHEN salary<5000 THEN 'Low' 
+WHEN salary<10000 THEN 'Medium' 
+WHEN salary<20000 THEN 'Good' 
+ELSE 'Excellent' 
+END) 
+qualified_salary FROM employees;
+
+
+----instead of then we use  decode----
+SELECT last_name, job_id, salary,
+DECODE(job_id, 'IT_PROG', 1.10*salary,
+'ST_CLERK', 1.15*salary,
+'SA_REP', 1.20*salary,
+salary)
+REVISED_SALARY
+FROM employees;
+
+---another exmp----
+SELECT last_name, salary,
+DECODE (TRUNC(salary/2000, 0),
+0, 0.00,
+1, 0.09,
+2, 0.20,
+3, 0.30,
+4, 0.40,
+5, 0.42,
+6, 0.44,
+0.45) TAX_RATE
+FROM employees
+WHERE department_id = 80;
+
+-------------------------------
+NVL2
+----------
+select first_name,manager_id, salary, NVL2(manager_id,salary+5000,salary) from employees;
+
+SELECT last_name, salary, commission_pct,
+NVL2(commission_pct,'SAL+COMM', 'SAL') income
+FROM employees WHERE department_id IN (50, 80);
+
+select * from employees;
+
+select first_name,JOB_ID, salary, NVL2(JOB_ID,salary*0.2+salary,salary) from employees;
+
+NULLIF
+-----------
+select first_name,salary,NULLIF(salary,salary+10) from employees;
+
+
+SELECT 
+first_name, LENGTH(first_name) "expr1",
+last_name, LENGTH(last_name) "expr2",
+NULLIF(LENGTH(first_name), LENGTH(last_name)) result
+FROM employees;
+
+
+-------
+SELECT laonno, NULLIF(intrest_rate,10) result FROM daily_pipeline_loan_fact
+
+loan no     result
+1.         NULL
+2.         12
+3.         15
+4.         NULL
+
+select first_name, hire_date, NULLIF(hire_date, '08/17/2002') from employees;
+
+
+select first_name, hire_date, NULLIF(hire_date, To_date('08/17/2002','fmMM/DD/YY')) from employees;
+
+
+-------------COALESCE
+
+SELECT coalesce( address1, address2, address3 ) res
+
+
+-------------------------------------
+select AVG(commission_pct) from employees;
+SELECT AVG(NVL(commission_pct, 0)) FROM employees;
+
+TO DISPLAY AVG SALARY OF EACH DEPARTMENT------------------------
+
+WAQ to display the count of employees from same department and also hired on same date.
+SELECT department_id, hire_date,
+ count(employee_id) "no of employees" FROM employees GROUP BY department_id, hire_date 
+order by department_id;
+----------------------------------------
+Copyright © 2014, Oracle and/or its affiliates. All rights reserved. 6 - 28 SELECT column, group_function 
+FROM table 
+[WHERE condition] 
+[GROUP BY group_by_expression] 
+[HAVING group_condition] 
+[ORDER BY column]; 
+
+
+
+
+
+
+
+
+ 
+
+
+

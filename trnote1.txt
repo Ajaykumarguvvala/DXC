@@ -1,0 +1,51 @@
+https://github.com/Ajaykumarguvvala/DXC
+Practice for lesson 2
+This practice covers the following topics:
+•
+Selecting all data from different tables
+•
+Describing the structure of tables
+•
+Performing arithmetic calculations and specifying column names
+
+
+WILD CARD PATTERN
+
+SELECT * from employees
+where first_name like '%r'
+
+SELECT * from employees
+where first_name like 'A_e%'
+
+SELECT * from employees
+where first_name like '__r%'
+
+SELECT * from employees
+where first_name not like '__r%'
+
+--To find out the students whose sixth character is underscore
+select * from students where student_name like '_____\_%' escape '\'
+
+SELECT last_name, department_id, salary
+FROM employees
+WHERE department_id = 60
+OR department_id = 80
+AND salary > 10000;
+------------
+SELECT last_name, department_id, salary
+FROM employees
+WHERE ( department_id = 60
+OR department_id = 80)
+AND salary > 10000;
+
+https://github.com/tufailahm/dxc
+
+select first_name, salary , lpad(salary,6,'X') from employees;
+
+select first_name, salary , rpad(salary,6,'X') from employees;
+
+
+
+
+
+

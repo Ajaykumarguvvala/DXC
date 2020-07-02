@@ -1,0 +1,114 @@
+INNER /EQUI /SIMPLE
+SELECT e.last_name, e.department_id, d.department_name
+FROM employees e JOIN departments d
+ON (e.department_id = d.department_id) ;
+
+
+SELECT e.last_name, e.department_id, d.department_name
+FROM employees e LEFT OUTER JOIN departments d
+ON (e.department_id = d.department_id) ;
+
+SELECT e.last_name, e.department_id, d.department_name
+FROM employees e RIGHT OUTER JOIN departments d
+ON (e.department_id = d.department_id) ;
+
+SELECT e.last_name, e.department_id, d.department_name
+FROM employees e FULL OUTER JOIN departments d
+ON (e.department_id = d.department_id) ;
+SELECT last_name, department_name
+FROM employees
+CROSS JOIN departments ;
+SELECT first_name from employees WHERE salary > (select salary from employees where upper(first_name) ='NEENA');
+
+SELECT last_name, job_id, salary 
+FROM employees 
+WHERE job_id = 
+(SELECT job_id 
+FROM employees 
+WHERE last_name = 'Taylor') 
+AND salary > 
+(SELECT salary 
+FROM employees 
+WHERE last_name = 'Taylor'); 
+
+SELECT last_name, job_id, salary 
+FROM employees 
+WHERE job_id = 
+(SELECT job_id 
+FROM employees 
+WHERE last_name = 'Taylor') 
+AND salary > 
+(SELECT salary 
+FROM employees 
+WHERE last_name = 'Taylor'); 
+
+table creation---------------------
+CREATE TABLE DXC_dept
+(
+   DEP_id NUMBER(2),
+   DEP_name VARCHAR(20),
+   first_name VARCHAR(30)
+)
+desc DXC_dept
+
+----------------------------------------
+SELECT last_name,department_id,salary from employees GROUP by department_id where salary = (select max(salary) from employees;
+
+CREATE TABLE DXC_dept
+(
+   DEP_id NUMBER(2),
+   DEP_name VARCHAR(20),
+   first_name VARCHAR(30)
+)
+desc DXC_dept
+
+CREATE TABLE DXC_EMPLOYEES
+(
+   EMP_id NUMBER(2),
+   EMP_name VARCHAR2(20),
+   SALARY   VARCHAR2(20),
+   MOBILE   CHAR(10),
+   DEP_ID   NUMBER(3)
+)
+DESC DXC_EMPLOYEES
+-----------------------------------------------------------------------
+
+insert into DXC_EMPLOYEES values (2,'mahi',2000,9908649079,123);
+select *from DXC_EMPLOYEES;
+
+
+CREATE TABLE PLAYERS
+(   
+    PLAYER_ID NUMBER(5),
+    PLAYER_NAME VARCHAR2(20),
+    PLAYER_TYPE VARCHAR2(20),
+    SCORES NUMBER(4)
+)
+
+INSERT INTO  PLAYERS VALUES(1,'MESSI','FORWARD',643);
+INSERT INTO  PLAYERS VALUES(7,'DHONI','HITTER',700);
+INSERT INTO  PLAYERS VALUES(4,'SEHWAG','DRIVES',900);
+SELECT *FROM PLAYERS;
+
+1) XX - select first_name,hire_date from employees where hire_date > ( select hire_date from employees where first_name = 'David')
+2) XX - select first_name,hire_date from employees where hire_date  in ( select hire_date from employees where first_name = 'David')
+3) // - select first_name,hire_date from employees where hire_date > ANY  ( select hire_date from employees where first_name = 'David')
+4) // - select first_name,hire_date from employees where hire_date > ALL  ( select hire_date from employees where first_name = 'David')
+
+----------------------------------------
+
+SELECT first_name, department_id, salary 
+FROM employees 
+WHERE (salary, department_id) IN 
+(SELECT min(salary), department_id 
+FROM employees 
+GROUP BY department_id) 
+ORDER BY department_id;
+
+
+Please visit HRConnect for HR, Payroll, Expenses and Time entry help
+
+
+
+
+

@@ -1,0 +1,286 @@
+CREATE TABLE a AS select * from employees;
+
+
+--SELF JOIN
+JOINING THE SAME TABLE
+
+select * from employees;
+
+
+Employee: Neena managed by Manager: Steven
+
+select 'Employee: ' || worker.first_name || ' managed by Manager: ' || manager.first_name
+AS "Employee and there Managers"
+FROM employees worker JOIN employees manager
+ON manager.manager_id = worker.employee_id
+
+inner join vs self join
+diff table     same table
+matching data   matching data
+
+-----------------------------------------
+---SUBQUERY - A QUERY WITHIN A QUERY
+
+EXAMPLE 1 :
+QUERY : I WANT TO KNOW ALL THE PEOPLE WHO ARE HUMAN RESOURCES employees
+
+select * from departments;
+
+---SUBQUERY
+select first_name from employees where department_id IN 
+(select department_id from departments where UPPER(department_name) = 'HUMAN RESOURCES' )
+
+EXAMPLE 2: I WANT TO KNOW ALL THE PEOPLE WHOSE SALARY THAN Steven
+
+
+select first_name,salary from employees where salary > ANY (select salary from employees where lower(first_name)='steven')
+
+select first_name,salary from employees where salary > ALL (select salary from employees where lower(first_name)='steven')
+
+
+--MAXIMUM -- all
+SELECT employee_id, last_name, job_id, salary
+FROM employees
+WHERE salary > ALL
+(SELECT salary
+FROM employees
+WHERE job_id = 'IT_PROG')
+
+
+--MINIMUM - any
+SELECT employee_id, last_name, job_id, salary
+FROM employees
+WHERE salary > ANY
+(SELECT salary
+FROM employees
+WHERE job_id = 'IT_PROG')
+-------------------------------------
+max(salary) > 11000
+
+--ERROR
+SELECT department_id, MAX(salary)
+FROM employees
+where max(salary) > 11000
+GROUP BY department_id
+
+--SOLUTION
+SELECT department_id, MAX(salary)
+FROM employees
+GROUP BY department_id
+HAVING max(salary) > 11000
+
+
+CREATE TABLE COPY_EMPLOYEES AS SELECT * FROM employees
+CREATE TABLE COPY_EMPLOYEES AS SELECT * FROM employees
+
+CREATE TABLE COPY_EMPLOYEES AS SELECT * FROM employees
+--------------------------------------------------------------
+create table RETIRED_EMPLOYEES
+as 
+select *from employees where first_name IN ('Diana','Neena');
+
+create table retired_employees
+as 
+select * from employees where first_name in ('diana', 'neena');
+
+select * from retired_employees
+UNION ALL
+select * from employees
+-------------------------------------
+create table retired_employees
+as 
+select * from employees where first_name in ('diana', 'neena');
+
+select * from retired_employees
+UNION ALL
+select * from employees
+
+create table retired_employees
+as 
+select * from employees where first_name in ('diana', 'neena');
+
+select * from retired_employees
+UNION ALL
+select * from employees
+
+
+
+select *from copy_employees
+intersect
+select *from retired_employees;
+
+
+SELECT location_id, department_name AS "Department", TO_CHAR(NULL) AS "Warehouse location"
+FROM departments
+UNION
+SELECT location_id, TO_CHAR(NULL)AS "Department", state_province as "wharehouse location"
+FROM locations;
+
+---------------------------------------------------
+SELECT first_name,salary,hire_date as "hire_date" FROM copy_employees
+ union 
+SELECT first_name,salary,TO_DATE(NULL)"hire_date" from RETIRED_EMPLOYEES
+
+--------------------------------------------------------------------------
+
+UNION to return all distinct rows 
+•UNION ALL to return all rows, including duplicates 
+•INTERSECT to return all rows that are shared by both queries 
+•MINUS to return all distinct rows that are selected by the first query, but not by the second 
+•ORDER BY only at the very end of the statement
+
+-----------practice-----------------------------------------------------------
+DELETE from copy_employees where first_name IN ('Neena');
+select *from copy_employees;
+
+Select *from copy_employees
+Union
+select *from retired_employees;
+
+select *from copy_employees
+union all
+select *from employees;
+
+create table retired_employees
+as 
+select * from employees where first_name in ('diana', 'neena');
+
+select * from retired_employees
+UNION ALL
+select * from employees;
+
+select *from copy_employees
+minus
+select *from retired_employees;
+
+select *from copy_employees
+intersect
+select *from retired_employees;
+
+create table SENIOR_EMPLOYEES select *from employees where first_name IN ('Neena','Lex','David');
+
+
+SELECT location_id, department_name AS "Department", TO_CHAR(NULL) AS "Warehouse location"
+FROM departments
+UNION
+SELECT location_id, TO_CHAR(NULL)AS "Department", state_province
+FROM locations;
+
+
+SELECT first_name,salary,hire_date as "hire_date" FROM copy_employees union SELECT first_name,salary,TO_DATE(NULL)"hire_date" from RETIRED_EMPLOYEES
+
+-----------------------------------------------------DML-----------
+insert into  employees value (1918,'ajay','kumar','ajaykumarguvvalaa',Null,'01-27-1998','20',Null,Null,Null,Null);
+select *from employees;
+desc employees;
+select *from departments;
+desc departments;
+
+insert into departments values(1913,'anna',Null,Null);
+insert into departments (department_id,department_name)values(1914,'anna');
+
+
+insert into employees  values(1921,'Ikben','Ghosh','Ikben@gmail.com','1239871',SYSDATE, 'IT_PROG', 25000 , NULL, 123 , 10)  
+
+insert into employees  values(1922,'Ganesh','Reddy','ganesh@gmail.com','9991231',CURRENT_DATE, 'IT_PROG', 25000 , NULL, 123 , 10)  
+
+
+
+select * from employees where employee_id = 1922;
+
+--------------TO_DATE------------------
+----INSERTING DATA VALUES
+
+1)
+INSERT into EMPLOYEES values (1918, 'krishna', 'kamal', 'abcde@gmail.com', '9988776655', '09-02-20', 'IT_PROG' , 25000, NULL, 103, 20);
+
+2) SYSDATE
+insert into employees  values(1921,'Ikben','Ghosh','Ikben@gmail.com','1239871',SYSDATE, 'IT_PROG', 25000 , NULL, 123 , 10)  
+
+3) CURRENT_DATE
+insert into employees  values(1922,'Ganesh','Reddy','ganesh@gmail.com','9991231',CURRENT_DATE, 'IT_PROG', 25000 , NULL, 123 , 10)  
+
+4)
+INSERT INTO employees
+VALUES (1923,
+'Den', 'Raphealy',
+'DRAPHEAL@gmail.com', '515.127.4561',
+TO_DATE('FEB 3, 2003', 'MON DD, YYYY'),
+'SA_REP', 11000, 0.2, 100, 60);
+
+--------------------------------------------------------
+Microsoft Windows [Version 10.0.18363.900]
+(c) 2019 Microsoft Corporation. All rights reserved.
+
+C:\Users\ASUS>sqlplus
+
+SQL*Plus: Release 11.2.0.2.0 Production on Thu Jul 2 15:23:19 2020
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Enter user-name: system
+Enter password:
+
+Connected to:
+Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+
+SQL> select *from hr.departments;
+
+
+
+
+
+
+
+SQL> insert into hr.departments values (&department_id,'&department_name',&manager_id,&manager_name);
+Enter value for department_id: 1111
+Enter value for department_name: neem
+Enter value for manager_id: 200
+Enter value for manager_name: 1700
+old   1: insert into hr.departments values (&department_id,'&department_name',&manager_id,&manager_name)
+new   1: insert into hr.departments values (1111,'neem',200,1700)
+
+1 row created.
+
+----------------------------------------------
+INSERT INTO sales_reps(employee_id, last_name, salary, commission_pct)
+SELECT employee_id, last_name, salary, commission_pct
+FROM employees
+WHERE salary < 15000
+
+------COPY THE 
+CREATE TABLE sales_reps 
+AS
+SELECT employee_id, last_name, salary, commission_pct
+FROM employees
+
+
+select * from sales_reps;
+
+--DELETE THE ENTIRE
+delete from sales_reps;
+
+
+
+
+
+-------------------------------------
+-------UPDATE USING SUBQUERY
+UPDATE copy_employees
+SET department_id = (SELECT department_id
+FROM employees
+WHERE employee_id = 100)
+WHERE job_id = (SELECT job_id
+FROM employees
+WHERE employee_id = 200);
+----------------------------------------
+delete from copy_employees where hire_date =sysdate;
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,100 @@
+L> savepoint dxc1;
+
+Savepoint created.
+
+SQL> insert into departments values(668,'hr',100,1700);
+insert into departments values(668,'hr',100,1700)
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> insert into hr.departments values(668,'hr',100,1700);
+
+1 row created.
+
+SQL> savepoint dxc2;
+
+Savepoint created.
+
+SQL> insert into hr.departments values(669,'hr',100,1700);
+
+1 row created.
+
+SQL> select count(*) from hr.departments;
+
+  COUNT(*)
+----------
+        37
+
+SQL> rollback to dxc2;
+
+Rollback complete.
+
+SQL> select count(*) from hr.departments;
+
+  COUNT(*)
+----------
+        36
+
+SQL>
+
+-------------------implicit locking will be done if we use DML-------
+if we want to lock explicitly we need to use FOR UPDATE---------
+
+
+
+
+
+
+
+insert into hr.departments values(669,'hr',100,1700);
+
+
+
+COLUMN NAME AND TABLE SHOULD BE MAX : 30
+COLUMN NAME AND TABLE SHOULD BE MAX : 30
+COLUMN SIZE CAN BE ANY SIZE
+
+=====================================================ASSIGNMENT===============
+
+create table emp
+(
+empid NUMBER(4) CONSTRAINT PKEMPID primary key,
+empname VARCHAR2(20) CONSTRAINT CHKEMPNAMENOTNULL not null,
+empadress VARCHAR2(20) CONSTRAINT CHKEMPADD check (empadress  in('kurnool','Anantapur','Hyd','Bangloore')),
+salary NUMBER(10) CONSTRAINT CHKEMPSALARY check (salary between 0 and 80000)
+)
+
+SELECT *from emp;
+===========================ass3========================
+
+create table employee
+( 
+   employee_id NUMBER(10) CONSTRAINT primary key,
+   employeeName VARCHAR2(20),
+   employeeAdress VARCHAR2(30) CONSTRAINT CHKEMPADRESS check(empAdress not in ('Newyork','London','Paris')),
+   salary NUMBER(10)  CONSTRAINT CHKEMPSALARY check( salary between 20000 and 30000),
+   companyAdress VARCHAR2(20) default 'ASV sun tech park'
+)
+
+drop table employee;
+
+create table  salary
+(
+ employeeID NUMBER(10) primary key,
+ employeePf NUMBER(10) CONSTRAINT CHKEMPPF check(employeepf> '0'),
+ employeeHRA NUMBER(10)  CONSTRAINT CHKEMPHRA check(employeeHRA>'0')
+)
+insert into salary values (100,102,108);
+insert into salary values (101,102,108);
+insert into salary values (102,102,108);
+select *from salary;
+
+DROP TABLE SALARY;
+
+
+
+
+
+

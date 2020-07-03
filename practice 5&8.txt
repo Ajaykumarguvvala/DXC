@@ -1,0 +1,129 @@
+select *from employees;
+
+select last_name,hire_date
+from employees
+where hire_date > TO_DATE('01-jan-90','DD-mon-RR');
+
+select last_name,first_name,hire_date,salary
+from employees
+where salary > '20000' order by department_id;
+
+
+select NVL(commission_pct,0) as "comissio"
+from employees;
+select *from employees;
+
+select salary,commission_pct,
+ NVL2(commission_pct,salary+1000,salary)
+from employees;
+
+select NULLIF(LENGTH(first_name),LENGTH(last_name))
+from employees;
+
+SELECT last_name, job_id, salary,
+ CASE job_id WHEN 'IT_PROG' THEN 1.10*salary
+ WHEN 'ST_CLERK' THEN 1.15*salary
+WHEN 'SA_REP' THEN 1.20*salary
+ ELSE salary
+ END "REVISED_SALARY"
+FROM employees;
+
+select first_name,last_name,job_id,salary,
+CASE job_id when 'IT_PROG' then 1.10*salary
+WHEN 'ST_CLERK' then 1.15*salary
+WHEN 'SA_REP' THEN 1.2*salary
+ELSE salary
+END "revised salary"
+from employees;
+
+
+SELECT last_name,salary,
+(CASE WHEN salary<5000 THEN 'Low'
+ WHEN salary<10000 THEN 'Medium'
+ WHEN salary<20000 THEN 'Good'
+ ELSE 'Excellent'
+END) qualified_salary
+FROM employees;
+
+
+
+
+
+
+SELECT last_name, salary,
+ DECODE(TRUNC(salary/2000, 0),
+ 0, 0.00,
+1, 0.09,
+2, 0.20,
+3, 0.30,
+4, 0.40,
+5, 0.42,
+6, 0.44,
+ 0.45) TAX_RATE
+FROM employees
+WHERE department_id = 80;
+
+
+SELECT employee_id, first_name, job_id, job_title
+from employees NATURAL JOIN jobs;
+SELECT employee_id, first_name, job_id, job_title
+FROM jobs NATURAL JOIN employees;
+
+ SELECT employee_id, last_name,
+ location_id, department_id
+FROM employees JOIN departments
+USING ( department_id) ;
+
+select e.employee_id,e.last_name,e.department_id,
+d.department_id,d.location_id
+from employees e JOIN departments d
+ON (e.department_id = d.department_id)
+AND e.manager_id = 100;
+
+
+select e.employee_id,e.last_name,e.department_id,
+d.department_id,d.location_id
+from employees e JOIN departments d
+ON (e.department_id = d.department_id)
+where e.manager_id = 100;
+
+select *from locations;
+
+
+SELECT e.employee_id, e.last_name, e.department_id,
+ d.department_id, d.location_id
+FROM employees e JOIN departments d
+ON (e.department_id = d.department_id);
+
+SELECT e.last_name, e.salary, j.grade_level
+FROM employees e JOIN job_grades j
+ON e.salary
+ BETWEEN j.lowest_sal AND j.highest_sal;
+
+SELECT e.last_name, e.department_id, d.department_name
+FROM employees e LEFT OUTER JOIN departments d
+ON (e.department_id = d.department_id) ;
+
+SELECT e.last_name, d.department_id, d.department_name
+FROM employees e RIGHT OUTER JOIN departments d
+ON (e.department_id = d.department_id) ;
+
+SELECT e.last_name, d.department_id, d.department_name
+FROM employees e FULL OUTER JOIN departments d
+ON (e.department_id = d.department_id) ;
+
+select job_id,job_id
+from employees cross join departments;
+
+SELECT 
+FROM employees
+CROSS JOIN departments ;
+
+select *from departments;
+select *from employees;
+
+
+
+
+
+

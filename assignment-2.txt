@@ -1,0 +1,29 @@
+
+
+create table employee
+(
+ employee_id NUMBER(3),
+ employee_name VARCHAR2(20),
+ employee_adress VARCHAR2(30),
+ employee_dob  CHAR(10),
+ employee_doj  CHAR(10),
+ employee_salary NUMBER(4)
+)
+
+select *from employee;
+
+insert into employee values(100,'ravi','xyzz','03-03-1998','03-04-1998',2900);
+
+
+insert into employee values(101,'ajaj','xyzx','03-03-1998','03-04-1997',2100);
+
+insert into employee values(102,'naveen','xyzy','03-03-1996','03-04-1997',2200);
+
+insert into employee values(103,'man','xyn','03-03-2000','03-04-1997',2209);
+
+insert into employee values(104,'rahul','xyzn','03-03-1994','03-04-1997',2280);
+select *from employee;
+
+select *from employee;
+
+drop table employee;

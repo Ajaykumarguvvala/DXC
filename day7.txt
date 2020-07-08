@@ -1,0 +1,73 @@
+create index index_employees on employees(first_name asc,last_name asc,job_id asc,hire_date asc,salary asc);
+
+select *from ALL_INDEXES where TABLE_NAME = 'EMPLOYEES'
+select *from employees;
+
+select *from employees;
+
+select index_name, column_name from user_ind_columns where table_name = 'EMPLOYEES'
+create synonym dxc_10 for employees;
+select *from dxc_10;
+drop synonym dxc_10;
+
+i have doubt on using two users====================
+=================================view====================================
+create or replace VIEW my_emp
+as 
+select first_name,department_id,salary
+from employees where department_id = '100' and salary > '100';
+
+select *from employees;
+
+select *from my_emp;
+ drop view my_emp;
+ update my_emp 
+set salary ='20000' where first_name ='Nancy';
+
+=====================================with read only=======================
+create or replace VIEW my_emp
+as 
+select first_name,department_id,salary
+from employees where department_id = '100' and salary > '100'
+with read only
+=======================================with check option=================
+select first_name,department_id,salary
+from employees where department_id = '100' and salary > '10000'
+with check option
+
+update my_emp 
+set salary ='2000' where first_name ='Nancy';
+
+================================sequence===============================
+create sequence dxc_sequence
+minvalue 1
+maxvalue 9000
+start with 100
+increment by 2
+=====================script=======================
+CREATE TABLE Patient
+(
+  patient_id number primary key,
+  patient_name varchar2(20)
+  );
+  
+  drop table patient;
+ drop table doctor;
+  CREATE TABLE Doctor
+  (
+   doctor_id number primary key,
+   doctor_name varchar2(20)
+   );
+   
+   
+   INSERT INTO patient values (11,'Apple');
+   INSERT INTO patient values (12,'Ball');
+   INSERT INTO patient values (13,'Cat');
+   
+   INSERT INTO doctor values (100, 'Dr. Gulati');
+   INSERT INTO doctor values (101, 'Dr. Sharma');
+   INSERT INTO doctor values (102, 'Dr. Kalpana');
+==========================================================
+
+
+

@@ -1,0 +1,191 @@
+===========terenary=======operator==========
+public class Student {
+	
+	int marks=36;
+	public void display() {
+		String result;
+		result = marks>35 ?" pass":"fail";
+		System.out.println("result is:"+result);	
+		
+	}
+	
+	public static void main(String[] args) {
+		Student s =new Student();
+		s.display();
+	}
+
+}
+========================else if===============================
+import java.util.Scanner;
+
+//multiple if (conditional )
+public class IfDemo {
+
+ int marks = 0;
+ Scanner sc = new Scanner(System.in);
+
+ public void display() {
+  System.out.println("Please enter to marks to know the status : ");
+  marks = sc.nextInt();
+  
+  if (marks > 90 && marks < 100) {
+   System.out.println("CONGARTS !! YOU HAVE CLEARED THE EXAM WITH DISTINCTION");
+  } 
+  else  if (marks > 80 && marks < 90){
+   System.out.println("CONGARTS !! YOU HAVE CLEARED THE EXAM WITH GOOD MARKS");
+===========================switch============================================
+
+import java.util.Scanner;
+
+//switch demo
+public class SwitchDemo {
+
+ int week =0;
+ Scanner sc = new Scanner(System.in);
+ public void display() {
+  System.out.print("Enter the week number (1-7 ) - Monday as 1 ..");
+  week = sc.nextInt();
+  switch (week) {
+  case 1:
+   System.out.println("Today is monday");
+   break;
+  case 2:
+   System.out.println("Today is tuesday");
+   break;
+  case 3:
+   System.out.println("Today is wednesday");
+   break;
+  case 4:
+   System.out.println("Today is thursday");
+   break;
+  case 5:
+   System.out.println("Today is friday");
+   break;
+  case 6:
+  case 7:
+   System.out.println("WEEKEND");
+   break;
+  default:
+   System.out.println("Invalid week number");
+  }
+ }
+ public static void main(String[] args) {
+  SwitchDemo d = new SwitchDemo();
+  d.display();
+ }
+
+}
+===========================================================
+public class Whileloop {
+ int i;
+ public void display() {
+  i=50; 
+  while(i>0){
+   System.out.println(i);
+   
+   i=i-10;
+   
+  }
+ }
+
+ public static void main(String[] args) {
+  Whileloop d = new Whileloop();
+  d.display();
+  // TODO Auto-generated method stub
+
+ }
+
+}
+=============================================
+import java.util.Scanner;
+
+//real time use case 
+public class ReadProgramAssignment {
+
+ Scanner sc = new Scanner(System.in);
+ int employeeAge = 0;
+ String employeeName;
+ String choice;
+
+ public void display() {
+
+  do {
+   System.out.print("Please enter your age :");
+   employeeAge = sc.nextInt();
+   System.out.print("Please enter your name :");
+   employeeName = sc.next();
+   System.out.println(employeeName + " , your age is : " + employeeAge);
+
+   System.out.println("Do u want to continue (Y for yes any key to exit);");
+   choice = sc.next();
+  } while (choice == "Y");
+
+  System.out.println("Thanks for using my program");
+ }
+
+ public static void main(String[] args) {
+  ReadProgramAssignment r = new ReadProgramAssignment();
+  r.display();
+
+ }
+}
+=================================Break and continue=============================================
+import java.util.Scanner;
+
+//accept three numbers ( 1 - 100 ) 
+// negative are entered , you exit
+// but if numbers are greater than 100 , then ignore
+/*
+ * Enter enter a number :3
+ * Enter enter a number :110 (continue)
+ * Enter enter a number :6
+ * 
+ * Result : 9
+ * 
+ * 2nd Scenario
+ *  Enter enter a number :3
+ * Enter enter a number :-110  (break)
+ * 
+ * Thanks 
+ * Result  : 3
+ */
+public class BreakDemoRealTimeExample {
+
+ Scanner sc = new Scanner(System.in);
+ int num,result; 
+ public void demo() {
+  for (int i = 1; i <= 3; i++) {
+    System.out.println("Enter a number : ");
+    num = sc.nextInt();
+    if( num > 100)
+      continue;
+    else if( num < 0)
+      break;
+    result += num;
+  }
+  System.out.println("Result is :"+result);
+ }
+
+ public static void main(String[] args) {
+  BreakDemoRealTimeExample d = new BreakDemoRealTimeExample();
+  d.demo();
+ }
+}
+============================================
+Additional Exercie :
+
+Passenger
+{
+
+ pnrnumber
+ passengerName
+ String journeyDate
+ source
+ destination
+
+ 
+  bookTicket
+  cancelTicket
+  modifyTicket
+  displayTicketDetails
+}

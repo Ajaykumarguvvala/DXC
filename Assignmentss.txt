@@ -1,0 +1,79 @@
+import java.util.Scanner;
+public class Passenger {
+	int pnrNumber;
+	String passengerName;
+	String journeyDate;
+	String destination;
+	
+	public void display() {
+		System.out.println("please book my ticket");
+	}
+	public void cancel() {
+		System.out.println("please cancel my ticket");
+	}
+	Scanner sc = new Scanner(System.in);
+	public void modify() {
+		System.out.println("======modify my ticket details");
+		System.out.println("Enter pnrNumber");
+		pnrNumber=sc.nextInt();
+		System.out.println("Enter passengerName");
+		passengerName=sc.next();
+		System.out.println("Enter journeyDate");
+		journeyDate=sc.next();
+		System.out.println("enter destination");
+		destination=sc.next();
+		
+	}
+	public void displayTicketDetails() {
+		System.out.println("pnrNumber is:"+pnrNumber);
+		System.out.println("passenger name is:"+passengerName);
+		System.out.println("journeyDate is:"+journeyDate);
+		System.out.println("destination is:"+destination);
+		
+	}
+	public static void main(String[] args) {
+		Passenger p=new Passenger();
+		p.display();
+		p.cancel();
+		p.modify();
+		p.displayTicketDetails();
+	}
+	
+
+}
+==============================================================
+import finance.*;
+import hr.*;
+import java.util.Scanner;
+public class Client {
+		public void paybill() {
+			System.out.println("pay pending bills");
+			
+		}
+		public static void main(String[] args) {
+			
+		Scanner sc=new Scanner(System.in);
+			
+			Client d = new Client();
+			d.paybill();
+			hr.Employee e = new Employee();
+			e.display();
+			hr.Manager m=new Manager();
+			m.manager();
+			finance.Salary s=new Salary();
+			s.salary();
+			finance.Pf p =new Pf();
+			p.paf();
+			finance.Hra h = new Hra();
+			h.hra();
+			
+			
+			
+			
+			
+			
+			
+		}
+
+	}
+

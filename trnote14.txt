@@ -1,0 +1,268 @@
+1) 
+Statement stat = con.createStatement();
+stat.executeQuery("select * from hr.product where productId = 2");
+
+2)
+Statement stat = con.createStatement();
+stat.executeQuery("select * from hr.product where productName like 'L%'");
+
+Parametrized queries
+----------------------------
+find by product id 
+
+
+Enter the product id : 2
+int pId = sc.nextInt();
+
+PreparedStatement stat = con.prepareStatement("select * from hr.product where productId = ?");
+stat.setInt(1,pId);
+
+ResultSet res = stat.executeQuery();
+
+if(res.next())
+{
+	
+}
+else
+{
+	System.out.println("Record not found for product id :"+pId);
+}
+
+
+3. 
+
+Enter the product Name (Like) : a
+Enter the min price range : 10
+Enter the max price range :  100
+
+Oracle query  :
+
+select * from hr.product where productName like '%a%' and price between 10 and 100
+
+Enter the product Name (Like) : h
+Enter the min price range : 200
+Enter the max price range :  500
+
+Oracle query  :
+
+select * from hr.product where productName like '%h%' and price between 200 and 500
+
+Enter the product name (Like) : ha
+String pName = sc.next();
+
+Enter the min price range : 900
+int minPrice = sc.nextInt();
+
+Enter the min price range : 1600
+int maxPrice = sc.nextInt();
+
+JDBC query
+
+ResultSetMeta Data
+-------------------------------
+PreparedStatement stat = con.prepareStatement(
+"select * from hr.product where productName like '%?%' and price between ? and ?")
+stat.setString(1,pName);
+stat.setInt(2,minPrice);
+stat.setInt(3,maxPrice);
+ResultSet res = stat.executeQuery();
+	while(res.next()) {
+			System.out.print(res.getString(1)+"  ");
+			System.out.print(res.getString(2)+"   ");
+			System.out.print(res.getString(3)+"   ");
+			System.out.println(res.getString(4));
+		}
+
+
+private static void displayProducts(Connection con) throws SQLException {
+		System.out.println("Displaying all the  Products : ");
+		Statement statement = con.createStatement();
+		ResultSet res = statement.executeQuery("select * from hr.product");
+		//metadata
+		ResultSetMetaData rsmd = res.getMetaData();
+
+		int columnNumber = rsmd.getColumnCount();
+		
+		for(int i=1;i<=columnNumber;i++)
+		{
+			System.out.print(rsmd.getColumnName(i)+"     ");
+		}
+		System.out.println();
+		while (res.next()) {
+			for (int i = 1; i <= columnNumber; i++) {
+				System.out.print(res.getString(i) + "  ");
+			}
+			System.out.println();
+
+		}
+	}
+
+-----------------------------------Exception Handling------------------------------------------------------------------
+
+Runtime error
+
+try
+{
+	//guard
+	int i = 10/2;
+	System.out.println("Done");
+}
+catch(Exception e)
+{
+	System.out.println("Exception happened");
+}
+finally
+{
+	con.close();
+}
+
+System.out.println("Thanks");
+
+
+
+
+
+
+
+
+Throwable:Object
+
+Exception
+
+
+
+
+Thread
+-----------
+Multi threaded application
+
+Games
+	Sound
+	Animation
+	Scores
+	Actions
+Thread - Light weight process
+
+
+4 programs - 
+
+1 program
+	4 threads
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1)
+RUN CALLED
+Program Started
+
+2)
+Program Started
+RUN CALLED
+
+
+
+---TWO Threads
+MAIN THREAD
+CHILD THREAD ( t1)
+
+
+
+
+HTML ( Hyper Text Markup Langauage )
+- Run browser
+- web page
+
+Introduction to Javascript, client side scripting,
+Javascript functions, FE, IIFE, Arrays, Date and Time Objects, Closures, DOM Objects
+Introduction to Scripting - Javascript, PowerShell, Python, Shell (Context and Uses)
+YAML/JSON
+========================
+
+select * from product where productname like 'a%'
+SELECT * FROM product WHERE productname LIKE 'a%'
+
+Zoo
+
+
+HTML
+---------------
+
+
+is to create web pages
+
+empty tag	<mohan/>
+container tag	<mohan>	</mohan>
+
+attributes/properties
+------------------------
+
+Inter page	- one page and goes in another page
+Intra Page	- you click and goes in another location in same page
+
+
+<font color="black" size="20" face="Vladimir Script">
+		Hello Tufail
+</font>
+
+
+
+
+---form
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form>
+		<h2>Product Form</h2>
+		<table cellspacing="10" align="center">
+		<tr><td>Product Id :</td><td> <input type="text" name="productId" id="productId"></td></tr>
+		<tr><td>Product Name :</td> <td><input type="text" name="productName" id="productName"></td></tr>
+		</table>
+	</form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

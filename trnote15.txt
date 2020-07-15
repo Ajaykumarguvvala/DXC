@@ -1,0 +1,1 @@
+file:///D:/corejava/Html/src/html/result.html?firstName=ajay&lastname=kumar&gender=male&hobbies=cricket&qualification=btech
